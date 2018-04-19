@@ -98,7 +98,8 @@ var send = function () {
     url:url,
     form:{
       time:time,
-      host:host
+      host:host,
+      ip:'https://bb-s.herokuapp.com'
     }
   },onSucess);
 }
