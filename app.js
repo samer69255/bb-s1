@@ -36,7 +36,19 @@ app.post('/blow',function (req,res ) {
 'https://bb-s4.herokuapp.com/',
 'https://bb-s5.herokuapp.com/',
 'https://bb-s6.herokuapp.com/',
-'https://bb-s7.herokuapp.com/'
+'https://bb-s7.herokuapp.com/',
+'https://bb-s8.herokuapp.com/',
+'https://bb-s9.herokuapp.com/',
+'https://bb-s10.herokuapp.com/',
+'https://bb-s11.herokuapp.com/',
+'https://bb-s12.herokuapp.com/',
+'https://bb-s13.herokuapp.com/',
+'https://bb-s14.herokuapp.com/',
+'https://bb-s15.herokuapp.com/',
+'https://bb-s16.herokuapp.com/',
+'https://bb-s17.herokuapp.com/',
+'https://bb-s18.herokuapp.com/',
+'https://bb-s19.herokuapp.com/',
 ],host);
 
 
