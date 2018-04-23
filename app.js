@@ -96,7 +96,7 @@ app.use(function (req,res) {
 });
 
 function sendCmd(servers,host) {
-var time = getNow() + (1 * 60*1000);
+var time = getNow() + (1 * 20*1000);
 var s = 0;
 var e = servers.length;
 
